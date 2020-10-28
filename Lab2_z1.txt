@@ -1,0 +1,128 @@
+#include <iostream>
+#include <math.h>
+
+
+
+using namespace std;
+
+// this - это обращение к этому элементу этого объекта класса
+
+
+class Complex_number	// Создаем класс Complex_number
+{
+private:	// Модификатор доступа private (можно не писать, по умолчанию всегда private)
+	int a, b;
+	double Module;
+	int* result = new int[2];	// Массив, где 0 элемент - результат для вещественной части, 1 элемент - результат для мнимой части	комплексного числа			
+
+	friend void Scan(Complex_number& scan, char ch);		// Дружественная функция ввода комплексного числа
+	friend void Print(Complex_number& print, char ch);		// Дружественная функция вывода комплексного числа
+	friend void ModuleVect(Complex_number& valAB);			// Дружественная функция нахождения длины вектора (модуля комплексного числа)
+	friend void PrModVect(Complex_number& valAB, char ch);	// Дружественная функция вывода длины вектора (модуля модуля комплексного числа)
+
+	friend istream& operator >> (istream& in, Complex_number& other); // Вводим комплексное число
+	friend ostream& operator << (ostream& ut, Complex_number& other); // Вывод комплексного числа
+public:		// Модификатор доступа public
+	Complex_number()								// Конструктор по умолчанию
+	{
+
+	}
+	Complex_number(int a)							// Конструктор с параметрами
+	{
+		this->a = a;
+	}
+	Complex_number(int a, int b)					// Конструктор с параметрами
+	{
+		this->a = a;
+		this->b = b;
+	}
+	Complex_number(const Complex_number& other)		// Конструктор копирования
+	{
+		a = other.a;
+		b = other.b;
+		result[0] = other.result[0];
+		result[1] = other.result[1];
+	}
+
+
+	//a и b находятся в private, из-за этого нельзя просто их взять, нужно сделать присваивание через set и получить их через get
+
+	void Set_a(int value_a)		
+	{
+		a = value_a;
+	}
+	void Set_b(int value_b)		
+	{
+		b = value_b;
+	}
+	int Get_a()					
+	{
+		return a;
+	}
+	int Get_b()					
+	{
+		return b;
+	}
+
+	void ModuleVect()	// Дружественная функция нахождения длины вектора (модуля комплексного числа)
+	{
+		Module = sqrt(a * a + b * b);
+	}
+
+
+	// Далее идут перегрузки (переопределения)
+	bool operator == (const Complex_number& other)	// Перегрузка оператора ==
+	{
+		if (Module == other.Module)
+		{
+			cout << "Числа равны" << endl;
+			return true;
+		}
+		else return false;
+	}
+	bool operator != (const Complex_number& other)	// Перегрузка оператора !=
+	{
+		if (Module != other.Module)
+		{
+			cout << "Числа не равны" << endl;
+			return true;
+		}
+		else  return false;
+	}
+	bool operator < (const Complex_number& other)	// Перегрузка оператора <
+	{
+		if (Module < other.Module)
+		{
+			cout << "Число A < числа B" << endl;
+			return true;
+		}
+		else return false;
+	}
+	bool operator > (const Complex_number& other)	// Перегрузка оператора >
+	{
+		if (Module > other.Module)
+		{
+			cout << "Число A > числа B" << endl;
+			return true;
+		}
+		else return false;
+	}
+
+	void operator = (const Complex_number& other)	// Перегрузка оператора =
+	{
+		a = other.a;
+		b = other.b;
+	}
+	int operator + (const Complex_number& other)	// Перегрузка оператора +
+	{
+		result[0] = a + other.a;
+
+		return result[0];
+	}
+	int* operator * (const Complex_number& other)	// Перегрузка оператора  *
+	{
+		result[0] = a * other.a + b * other.b * (-1);	// Результат для вещественной части
+		result[1] = a * other.b + b * other.a;			// Результат для мнимой части
+
+		return result;
+	}
