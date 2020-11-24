@@ -1,0 +1,46 @@
+	{
+			stack<char> st;
+			const char* s = "abc{xd(efgijk)as}mnopp";// исходное выражение
+			cout << "Cтрока: " << s << endl;
+			bool balance = true;
+			// balance=true если баланс существует, т. Е. Для каждой открывающейся //скобки есть закрывающая. И balance=false в противном случае
+			int n = strlen(s);
+			for (int i = 0; i < n && balance; i++)
+			{
+				if (s[i] == '{')
+					st.push(s[i]); //если встретили  {  - помещаем ее в стек
+				else
+					if (s[i] == '}')       // если встретили   }
+						if (!st.empty()) // и если стек не пуст
+						{
+							st.pop();
+						}    // удаляем из стека соответствующую {
+						else
+						{
+							balance = false;
+						} // Если нет соответствующей {
+			}
+			int m = strlen(s);
+			for (int i = 0; i < m && balance; i++)
+			{
+				if (s[i] == '(')
+					st.push(s[i]); //если встретили  (  - помещаем ее в стек
+				else
+					if (s[i] == ')')       // если встретили   )
+						if (!st.empty()) // и если стек не пуст
+						{
+							st.pop();
+						}    // удаляем из стека соответствующую (
+						else
+						{
+							balance = false;
+						} // Если нет соответствующей (
+			}
+			// если balance=true и в стеке нет непарных “{,)“ - баланс существует, иначе нет
+			if (balance && st.empty())
+				cout << "Есть баланс";
+			else
+				cout << "Нет баланса";
+			cout << endl << endl;
+			system("pause");
+		}
