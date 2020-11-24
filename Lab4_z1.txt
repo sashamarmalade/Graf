@@ -1,0 +1,71 @@
+#include <iostream> 
+#include <fstream>
+#include <vector>
+#include <list>
+#include <algorithm>
+#include <string>
+#include <string.h>
+#include <queue> 
+#include <stack>
+#include <locale>
+
+using namespace std;
+
+void input(vector  <int>  v, vector<int>::const_iterator i); // вывод вектора
+
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	int num;
+	cout << "Введите номер:" << endl;
+	cout << "1 - Задание 1.1." << endl;
+	cout << "2 - Задание 1.2." << endl;
+	cout << "3 - Задание 2." << endl;
+	cout << "0 - Выход." << endl;
+	cin >> num;
+	cout << endl;
+	system("cls");
+	while (num)
+	{
+		if (num == 1)
+		{
+
+			string word, word2;
+
+			cout << "Введите слово: ";
+			cin >> word;
+			word2 = word;
+			transform(word.begin(), word.end(), word.begin(), tolower);//Перевод в нижний регистр
+
+			stack<char> stk;
+			queue<char> que;
+
+			for (char x : word)
+			{
+				que.push(x);
+				stk.push(x);
+			}
+
+			for (int i = 0; i < (int)que.size(); i++)
+			{
+				if (que.front() != stk.top())
+				{
+					cout << "Слово не является паллиндромом. \n";
+					cout << endl;
+					system("pause");
+				}
+				que.pop();
+				stk.pop();
+			}
+			for (int i = 0; i < (int)que.size(); i++)
+			{
+				if (que.front() == stk.top())
+				{
+					cout << "Слово является паллиндромом. \n";
+					cout << endl;
+					system("pause");
+				}
+				que.pop();
+				stk.pop();
+			}
+		}
