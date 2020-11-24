@@ -1,0 +1,42 @@
+cout << endl << "----------Задание 2.3----------" << endl << endl;
+
+			cout << "Вектор до сортировки: " << endl;
+			input(v, i);
+			cout << endl;
+
+			sort(v.begin(), v.end());
+
+			cout << "Вектор после сортировки: " << endl;
+			input(v, i);
+			cout << endl;
+
+			cout << endl << "----------Задание 2.4----------" << endl << endl;
+
+			swap(v[0], v[v.size() - 1]);
+			cout << "Вектор после перестановки: " << endl;
+			input(v, i);
+			cout << endl << endl;
+			system("pause");
+		}
+		if (num > 3 || num < 1)
+		{
+			cout << "Вы выбрали не существующую задачу. Повторите выбор." << endl;
+			system("pause");
+		}
+		system("cls");
+		cout << "Введите номер:" << endl;
+		cout << "1 - Задание 1.1." << endl;
+		cout << "2 - Задание 1.2." << endl;
+		cout << "3 - Задание 2." << endl;
+		cout << "0 - Выход." << endl;
+		cin >> num;
+		cout << endl;
+		system("cls");
+	}
+}
+
+void input(vector  <int>  v, vector<int>::const_iterator i)
+{
+	for (i = v.begin(); i != v.end(); ++i)
+		cout << *i << " ";
+}
